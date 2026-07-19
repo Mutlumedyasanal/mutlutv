@@ -19,17 +19,17 @@
         }
         .header {
             background: linear-gradient(135deg, #1a1a2e, #16213e);
-            padding: 12px 20px;
+            padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 2px solid #e50914;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
             z-index: 10;
         }
         .header h1 {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
             background: linear-gradient(90deg, #e50914, #ff6b6b);
             -webkit-background-clip: text;
@@ -38,17 +38,17 @@
             align-items: center;
             gap: 8px;
         }
-        .header h1 i { -webkit-text-fill-color: #e50914; font-size: 22px; }
+        .header h1 i { -webkit-text-fill-color: #e50914; font-size: 20px; }
         .header .info {
-            font-size: 11px;
+            font-size: 10px;
             color: #888;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
         }
         .header .info .dot {
-            width: 8px; height: 8px;
+            width: 6px; height: 6px;
             background: #4caf50;
             border-radius: 50%;
             display: inline-block;
@@ -59,13 +59,14 @@
             50% { opacity: 0.3; transform: scale(0.8); }
         }
         .header .info span { color: #4caf50; }
+        .header .info .istatistik { color: #666; font-size: 9px; }
         
         .player-wrapper {
             position: relative;
             background: #000;
             width: 100%;
             aspect-ratio: 16/9;
-            max-height: 70vh;
+            max-height: 65vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -83,12 +84,12 @@
             position: absolute;
             bottom: 0; left: 0; right: 0;
             background: linear-gradient(transparent, rgba(0,0,0,0.85));
-            padding: 20px 15px 12px;
+            padding: 15px 12px 10px;
             opacity: 0;
             transition: opacity 0.4s ease;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
         }
         .player-wrapper:hover .custom-controls,
         .player-wrapper.show-controls .custom-controls { opacity: 1; }
@@ -96,56 +97,56 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 10px;
+            gap: 8px;
         }
         .custom-controls .top-row .channel-name {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             color: #fff;
             text-shadow: 0 2px 8px rgba(0,0,0,0.8);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-width: 60%;
+            max-width: 55%;
         }
         .custom-controls .top-row .time-display {
-            font-size: 12px;
+            font-size: 11px;
             color: #ccc;
             text-shadow: 0 2px 8px rgba(0,0,0,0.8);
         }
         .custom-controls .bottom-row {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
         .custom-controls .bottom-row button {
             background: none;
             border: none;
             color: #fff;
-            font-size: 20px;
+            font-size: 18px;
             cursor: pointer;
-            padding: 4px 6px;
+            padding: 3px 5px;
             border-radius: 4px;
             transition: 0.2s;
             text-shadow: 0 2px 8px rgba(0,0,0,0.8);
             display: flex;
             align-items: center;
             justify-content: center;
-            min-width: 32px;
+            min-width: 28px;
         }
         .custom-controls .bottom-row button:hover { color: #e50914; transform: scale(1.1); }
-        .custom-controls .bottom-row button.play-btn { font-size: 28px; }
+        .custom-controls .bottom-row button.play-btn { font-size: 24px; }
         .custom-controls .bottom-row .progress-container {
             flex: 1;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         .custom-controls .bottom-row .progress-container input[type="range"] {
             flex: 1;
             -webkit-appearance: none;
             appearance: none;
-            height: 4px;
+            height: 3px;
             background: rgba(255,255,255,0.3);
             border-radius: 2px;
             outline: none;
@@ -155,7 +156,7 @@
         .custom-controls .bottom-row .progress-container input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 14px; height: 14px;
+            width: 12px; height: 12px;
             border-radius: 50%;
             background: #e50914;
             cursor: pointer;
@@ -163,26 +164,26 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.5);
         }
         .custom-controls .bottom-row .progress-container input[type="range"]::-moz-range-thumb {
-            width: 14px; height: 14px;
+            width: 12px; height: 12px;
             border-radius: 50%;
             background: #e50914;
             cursor: pointer;
             border: 2px solid #fff;
         }
         .custom-controls .bottom-row .progress-container .time-label {
-            font-size: 12px;
+            font-size: 11px;
             color: #ccc;
-            min-width: 50px;
+            min-width: 40px;
             text-shadow: 0 2px 8px rgba(0,0,0,0.8);
         }
         .custom-controls .bottom-row .volume-container {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
         }
-        .custom-controls .bottom-row .volume-container button { font-size: 18px; min-width: 28px; }
+        .custom-controls .bottom-row .volume-container button { font-size: 16px; min-width: 24px; }
         .custom-controls .bottom-row .volume-container input[type="range"] {
-            width: 60px;
+            width: 50px;
             -webkit-appearance: none;
             appearance: none;
             height: 3px;
@@ -194,54 +195,53 @@
         .custom-controls .bottom-row .volume-container input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 12px; height: 12px;
+            width: 10px; height: 10px;
             border-radius: 50%;
             background: #e50914;
             cursor: pointer;
             border: 2px solid #fff;
         }
-        .custom-controls .bottom-row .fullscreen-btn { font-size: 18px; }
+        .custom-controls .bottom-row .fullscreen-btn { font-size: 16px; }
         
         .channel-bar {
             background: #1a1a2e;
-            padding: 10px 15px;
+            padding: 8px 12px;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             border-bottom: 1px solid #333;
         }
         .channel-bar select {
             flex: 1;
-            min-width: 160px;
-            padding: 8px 12px;
+            min-width: 140px;
+            padding: 6px 10px;
             background: #2a2a4a;
             color: #fff;
             border: 1px solid #444;
-            border-radius: 6px;
-            font-size: 13px;
+            border-radius: 5px;
+            font-size: 12px;
             cursor: pointer;
             outline: none;
         }
         .channel-bar select:focus { border-color: #e50914; }
         .channel-bar button {
-            padding: 8px 16px;
+            padding: 6px 14px;
             background: #e50914;
             color: #fff;
             border: none;
-            border-radius: 6px;
-            font-size: 13px;
+            border-radius: 5px;
+            font-size: 12px;
             font-weight: 600;
             cursor: pointer;
             transition: 0.3s;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
         .channel-bar button:hover { background: #ff0a1a; transform: scale(1.02); }
-        .channel-bar button:disabled { opacity: 0.5; cursor: not-allowed; }
         .channel-bar .status {
-            font-size: 12px;
+            font-size: 11px;
             color: #aaa;
             margin-left: auto;
             white-space: nowrap;
@@ -256,23 +256,22 @@
             50% { opacity: 0.2; }
         }
         
-        /* KATEGORİ BUTONLARI */
         .kategori-bar {
             background: #111;
-            padding: 8px 15px;
+            padding: 6px 12px;
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
+            gap: 4px;
             border-bottom: 1px solid #222;
             overflow-x: auto;
         }
         .kategori-bar .kat-btn {
-            padding: 4px 12px;
+            padding: 3px 10px;
             background: #1a1a2e;
             color: #888;
             border: 1px solid #333;
-            border-radius: 20px;
-            font-size: 11px;
+            border-radius: 16px;
+            font-size: 10px;
             cursor: pointer;
             transition: 0.2s;
             white-space: nowrap;
@@ -289,50 +288,50 @@
         
         .epg-container {
             background: #111;
-            padding: 12px 15px;
+            padding: 10px 12px;
             flex: 1;
             overflow-y: auto;
-            max-height: 30vh;
+            max-height: 28vh;
             border-top: 1px solid #222;
         }
         .epg-container .epg-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             border-bottom: 1px solid #333;
-            padding-bottom: 8px;
+            padding-bottom: 6px;
         }
         .epg-container .epg-header h3 {
             color: #e50914;
-            font-size: 15px;
+            font-size: 13px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
         .epg-container .epg-header .epg-count {
-            font-size: 11px;
+            font-size: 10px;
             color: #666;
             font-weight: 400;
         }
         .epg-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 8px 10px;
-            margin-bottom: 4px;
+            gap: 10px;
+            padding: 6px 8px;
+            margin-bottom: 3px;
             background: #1a1a2e;
-            border-radius: 6px;
+            border-radius: 5px;
             border-left: 3px solid #444;
             cursor: pointer;
             transition: 0.2s;
         }
-        .epg-item:hover { background: #2a2a4a; transform: translateX(4px); }
+        .epg-item:hover { background: #2a2a4a; transform: translateX(3px); }
         .epg-item.active { border-left-color: #e50914; background: #2a1a2e; }
         .epg-item img {
-            width: 40px; height: 56px;
+            width: 32px; height: 44px;
             object-fit: cover;
-            border-radius: 4px;
+            border-radius: 3px;
             background: #222;
             flex-shrink: 0;
         }
@@ -341,12 +340,12 @@
             min-width: 0;
         }
         .epg-item .info .title {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             color: #fff;
         }
         .epg-item .info .desc {
-            font-size: 11px;
+            font-size: 10px;
             color: #999;
             margin-top: 1px;
             display: -webkit-box;
@@ -355,24 +354,24 @@
             overflow: hidden;
         }
         .epg-item .info .time {
-            font-size: 10px;
+            font-size: 9px;
             color: #666;
             margin-top: 1px;
         }
         .epg-item .info .time .now { color: #4caf50; font-weight: 600; }
         .epg-item .play-btn {
-            padding: 3px 10px;
+            padding: 2px 8px;
             background: #e50914;
             color: #fff;
             border: none;
-            border-radius: 4px;
-            font-size: 10px;
+            border-radius: 3px;
+            font-size: 9px;
             cursor: pointer;
             flex-shrink: 0;
             transition: 0.2s;
         }
         .epg-item .play-btn:hover { background: #ff0a1a; transform: scale(1.05); }
-        .no-epg { color: #666; text-align: center; padding: 20px; font-size: 13px; }
+        .no-epg { color: #666; text-align: center; padding: 15px; font-size: 12px; }
         
         .loading-overlay {
             position: absolute;
@@ -389,13 +388,13 @@
         }
         .loading-overlay.show { opacity: 1; pointer-events: auto; }
         .loading-overlay .spinner {
-            width: 50px; height: 50px;
-            border: 4px solid #333;
+            width: 40px; height: 40px;
+            border: 3px solid #333;
             border-top-color: #e50914;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
-        .loading-overlay .loading-text { color: #aaa; font-size: 14px; margin-top: 12px; }
+        .loading-overlay .loading-text { color: #aaa; font-size: 12px; margin-top: 10px; }
         @keyframes spin { to { transform: rotate(360deg); } }
         
         .error-overlay {
@@ -412,74 +411,72 @@
             transition: opacity 0.4s;
         }
         .error-overlay.show { opacity: 1; pointer-events: auto; }
-        .error-overlay i { font-size: 48px; color: #e50914; }
-        .error-overlay .error-text { color: #fff; font-size: 16px; margin-top: 12px; }
-        .error-overlay .error-sub { color: #888; font-size: 12px; margin-top: 4px; }
+        .error-overlay i { font-size: 36px; color: #e50914; }
+        .error-overlay .error-text { color: #fff; font-size: 14px; margin-top: 10px; }
+        .error-overlay .error-sub { color: #888; font-size: 11px; margin-top: 3px; }
         
-        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #1a1a2e; }
-        ::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb { background: #444; border-radius: 2px; }
         ::-webkit-scrollbar-thumb:hover { background: #666; }
         
         @media (max-width: 600px) {
-            .header h1 { font-size: 16px; }
-            .header h1 i { font-size: 18px; }
-            .header .info { font-size: 10px; gap: 8px; }
-            .channel-bar select { font-size: 12px; padding: 6px 10px; min-width: 100px; }
-            .channel-bar button { padding: 6px 12px; font-size: 12px; }
-            .channel-bar .status { font-size: 10px; }
-            .custom-controls { padding: 12px 10px 8px; }
-            .custom-controls .bottom-row button { font-size: 16px; min-width: 28px; }
-            .custom-controls .bottom-row button.play-btn { font-size: 22px; }
-            .custom-controls .bottom-row .volume-container input[type="range"] { width: 40px; }
-            .custom-controls .top-row .channel-name { font-size: 12px; max-width: 50%; }
-            .epg-item { padding: 6px 8px; gap: 8px; }
-            .epg-item img { width: 32px; height: 44px; }
-            .epg-item .info .title { font-size: 12px; }
-            .epg-item .info .desc { font-size: 10px; }
-            .epg-container .epg-header h3 { font-size: 13px; }
-            .player-wrapper { aspect-ratio: 16/9; max-height: 50vh; }
-            .kategori-bar .kat-btn { font-size: 10px; padding: 3px 10px; }
-        }
-        @media (max-width: 400px) {
-            .header h1 { font-size: 14px; }
-            .header .info { font-size: 9px; gap: 4px; }
-            .channel-bar select { font-size: 11px; padding: 4px 8px; min-width: 80px; }
-            .channel-bar button { padding: 4px 10px; font-size: 11px; }
+            .header h1 { font-size: 15px; }
+            .header h1 i { font-size: 16px; }
+            .header .info { font-size: 9px; gap: 6px; }
+            .channel-bar select { font-size: 11px; padding: 5px 8px; min-width: 90px; }
+            .channel-bar button { padding: 5px 10px; font-size: 11px; }
+            .channel-bar .status { font-size: 9px; }
+            .custom-controls { padding: 10px 8px 6px; }
             .custom-controls .bottom-row button { font-size: 14px; min-width: 24px; }
             .custom-controls .bottom-row button.play-btn { font-size: 18px; }
-            .custom-controls .bottom-row .volume-container input[type="range"] { width: 30px; }
+            .custom-controls .bottom-row .volume-container input[type="range"] { width: 35px; }
+            .custom-controls .top-row .channel-name { font-size: 11px; max-width: 45%; }
+            .epg-item { padding: 5px 6px; gap: 6px; }
+            .epg-item img { width: 28px; height: 38px; }
+            .epg-item .info .title { font-size: 11px; }
+            .epg-item .info .desc { font-size: 9px; }
+            .epg-container .epg-header h3 { font-size: 12px; }
+            .player-wrapper { aspect-ratio: 16/9; max-height: 45vh; }
+            .kategori-bar .kat-btn { font-size: 9px; padding: 2px 8px; }
+            .header .info .istatistik { display: none; }
+        }
+        @media (max-width: 400px) {
+            .header h1 { font-size: 13px; }
+            .header .info { font-size: 8px; gap: 4px; }
+            .channel-bar select { font-size: 10px; padding: 4px 6px; min-width: 70px; }
+            .channel-bar button { padding: 4px 8px; font-size: 10px; }
+            .custom-controls .bottom-row button { font-size: 12px; min-width: 20px; }
+            .custom-controls .bottom-row button.play-btn { font-size: 16px; }
+            .custom-controls .bottom-row .volume-container input[type="range"] { width: 25px; }
         }
     </style>
 </head>
 <body>
-
     <div class="header">
         <h1><i class="fas fa-tv"></i> Mutlu TV</h1>
         <div class="info">
             <span class="dot"></span>
             <span id="channelCount">0</span> EPG kanal
             <span>•</span>
-            <span id="totalCount">128</span> toplam kanal
+            <span id="totalCount">36</span> toplam
+            <span class="istatistik">| 🔑 0 · 🌐 36</span>
             <span>•</span>
-            <i class="far fa-clock"></i> <span id="updateTime">19.07.2026 22:08</span>
+            <i class="far fa-clock"></i> <span id="updateTime">19.07.2026 22:19</span>
         </div>
     </div>
 
     <div class="player-wrapper" id="playerWrapper">
         <video id="video" playsinline></video>
-        
         <div class="loading-overlay" id="loadingOverlay">
             <div class="spinner"></div>
             <div class="loading-text">Yayın bağlanıyor...</div>
         </div>
-        
         <div class="error-overlay" id="errorOverlay">
             <i class="fas fa-exclamation-triangle"></i>
             <div class="error-text">Yayın hatası!</div>
             <div class="error-sub">Lütfen başka bir kanal deneyin</div>
         </div>
-
         <div class="custom-controls" id="customControls">
             <div class="top-row">
                 <span class="channel-name" id="channelNameDisplay">Kanal Seçiniz</span>
@@ -489,20 +486,17 @@
                 <button class="play-btn" id="playBtn" title="Oynat/Duraklat">
                     <i class="fas fa-play"></i>
                 </button>
-                
                 <div class="progress-container">
                     <span class="time-label" id="currentTimeLabel">00:00</span>
                     <input type="range" id="progressBar" value="0" min="0" max="100" step="0.1">
                     <span class="time-label" id="durationLabel">00:00</span>
                 </div>
-
                 <div class="volume-container">
                     <button id="muteBtn" title="Ses">
                         <i class="fas fa-volume-up"></i>
                     </button>
                     <input type="range" id="volumeBar" value="100" min="0" max="100" step="1">
                 </div>
-
                 <button class="fullscreen-btn" id="fullscreenBtn" title="Tam Ekran">
                     <i class="fas fa-expand"></i>
                 </button>
@@ -518,7 +512,6 @@
         <span class="status" id="statusText">⏳ Hazırlanıyor...</span>
     </div>
 
-    <!-- KATEGORİ FİLTRE -->
     <div class="kategori-bar" id="kategoriBar">
         <button class="kat-btn active" data-kat="TÜMÜ">TÜMÜ (50)</button>
         <button class="kat-btn" data-kat="DİĞER">DİĞER (10)</button> <button class="kat-btn" data-kat="HABER">HABER (7)</button> <button class="kat-btn" data-kat="SPOR">SPOR (3)</button> <button class="kat-btn" data-kat="ULUSAL">ULUSAL (22)</button> <button class="kat-btn" data-kat="YEREL">YEREL (5)</button> <button class="kat-btn" data-kat="ÇOCUK">ÇOCUK (3)</button> 
@@ -535,12 +528,8 @@
     </div>
 
     <script>
-        // ============================================================
-        // KANAL VERİLERİ
-        // ============================================================
         const KANALLAR = [{"id": "775", "name": "A Haber -", "is_epg": true, "kategori": "HABER", "hls": "https://trn03.tulix.tv/gt-ahabertv/index.m3u8"}, {"id": "822", "name": "A Spor", "is_epg": true, "kategori": "SPOR", "hls": "https://trn03.tulix.tv/gt-aspor/index.m3u8"}, {"id": "744", "name": "A2", "is_epg": true, "kategori": "DİĞER", "hls": "https://trn03.tulix.tv/gt-atv-a2tv/index.m3u8"}, {"id": "816", "name": "ATV", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-atv-live/index.m3u8"}, {"id": "805", "name": "ATV Avrupa", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-atv-avrupa-tv/index.m3u8"}, {"id": "739", "name": "Beyaz TV", "is_epg": true, "kategori": "DİĞER", "hls": "https://trn03.tulix.tv/gt-beyaztv/index.m3u8"}, {"id": "782", "name": "CBC Sport Azerbaijan", "is_epg": true, "kategori": "SPOR", "hls": "https://trn03.tulix.tv/gt-cbcsport/index.m3u8"}, {"id": "770", "name": "CNN Turk", "is_epg": true, "kategori": "HABER", "hls": "https://trn03.tulix.tv/gt-cnnturk-tv/index.m3u8"}, {"id": "768", "name": "Cartoon Network TR", "is_epg": true, "kategori": "ÇOCUK", "hls": "https://trn03.tulix.tv/gt-cartoontr/index.m3u8"}, {"id": "760", "name": "Diyanet TV", "is_epg": true, "kategori": "DİĞER", "hls": "https://trn03.tulix.tv/gt-trtdiyanet/index.m3u8"}, {"id": "776", "name": "EkoTurk", "is_epg": true, "kategori": "YEREL", "hls": "https://trn03.tulix.tv/gt-ekoturk/index.m3u8"}, {"id": "962", "name": "Fox 5", "is_epg": true, "kategori": "ULUSAL", "hls": "https://glb.bozztv.com/glb/hondu/hondu-rick-fox5/index.m3u8"}, {"id": "772", "name": "Haber Global", "is_epg": true, "kategori": "HABER", "hls": "https://trn03.tulix.tv/gt-haber-globaltv/index.m3u8"}, {"id": "771", "name": "Haber Turk", "is_epg": true, "kategori": "HABER", "hls": "https://trn03.tulix.tv/gt-haberturktv/index.m3u8"}, {"id": "802", "name": "Halk TV", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-halk-tvs/index.m3u8"}, {"id": "781", "name": "Idman TV", "is_epg": true, "kategori": "DİĞER", "hls": "https://trn03.tulix.tv/gt-idmantv/index.m3u8"}, {"id": "773", "name": "KRT Kultur TV", "is_epg": true, "kategori": "YEREL", "hls": "https://trn03.tulix.tv/gt-krt--tv/index.m3u8"}, {"id": "777", "name": "Kanal 24", "is_epg": true, "kategori": "YEREL", "hls": "https://trn03.tulix.tv/gt-kanal24/index.m3u8"}, {"id": "740", "name": "Kanal 7", "is_epg": true, "kategori": "YEREL", "hls": "https://trn03.tulix.tv/gt-kanal7/index.m3u8"}, {"id": "734", "name": "Kanal D", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-kanald-1tv/index.m3u8"}, {"id": "718", "name": "NOW TV", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-nowtv-live/index.m3u8"}, {"id": "769", "name": "NTV", "is_epg": true, "kategori": "HABER", "hls": "https://trn03.tulix.tv/gt-ntv-tv/index.m3u8"}, {"id": "736", "name": "Show Max", "is_epg": true, "kategori": "DİĞER", "hls": "https://trn03.tulix.tv/gt-showmax/index.m3u8"}, {"id": "735", "name": "Show TV", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-shows-tv/index.m3u8"}, {"id": "742", "name": "Sky 360", "is_epg": true, "kategori": "YEREL", "hls": "https://trn03.tulix.tv/gt-sky360/index.m3u8"}, {"id": "872", "name": "Sozcu TV", "is_epg": true, "kategori": "DİĞER", "hls": "https://trn03.tulix.tv/gt-sozcu-livetv/index.m3u8"}, {"id": "754", "name": "Sports TV", "is_epg": true, "kategori": "SPOR", "hls": "https://trn03.tulix.tv/gt-sporttv/index.m3u8"}, {"id": "723", "name": "Star TV", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-star-tv1/index.m3u8"}, {"id": "745", "name": "TLC Turkiye", "is_epg": true, "kategori": "DİĞER", "hls": "https://trn03.tulix.tv/gt-tlc-tv/index.m3u8"}, {"id": "787", "name": "TRT 1", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-trt1/index.m3u8"}, {"id": "891", "name": "TRT 2", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-trt2/index.m3u8"}, {"id": "762", "name": "TRT Belgesel", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-trtbelgesel/index.m3u8"}, {"id": "812", "name": "TRT Cocuk", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-trtcocuk/index.m3u8"}, {"id": "778", "name": "TRT Haber", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-trthaber/index.m3u8"}, {"id": "811", "name": "TRT Muzik", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-trtmusic/index.m3u8"}, {"id": "785", "name": "TRT Spor", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-trt-sportv/index.m3u8"}, {"id": "749", "name": "TRT Spor Yildiz", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-trt-spor2/index.m3u8"}, {"id": "808", "name": "TRT Turk", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-trtturk/index.m3u8"}, {"id": "779", "name": "TRT World", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-trtworld/index.m3u8"}, {"id": "738", "name": "TV100", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-tv100/index.m3u8"}, {"id": "818", "name": "TV8", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/tv8-hd-tv/index.m3u8"}, {"id": "806", "name": "TV8  Int", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-tv8international/index.m3u8"}, {"id": "733", "name": "TV8.5", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-tv8_5/index.m3u8"}, {"id": "780", "name": "TVNET", "is_epg": true, "kategori": "DİĞER", "hls": "https://trn03.tulix.tv/gt-tvnettv/index.m3u8"}, {"id": "815", "name": "Ulke TV", "is_epg": true, "kategori": "DİĞER", "hls": "https://trn03.tulix.tv/gt-ulketv/index.m3u8"}, {"id": "774", "name": "Ulusal TV", "is_epg": true, "kategori": "HABER", "hls": "https://trn03.tulix.tv/gt-ulusal-tv/index.m3u8"}, {"id": "761", "name": "Yaban TV", "is_epg": true, "kategori": "DİĞER", "hls": "https://trn03.tulix.tv/gt-yabantv/index.m3u8"}, {"id": "751", "name": "beIN Sports Haber", "is_epg": true, "kategori": "HABER", "hls": "https://trn03.tulix.tv/gt-beinsportshaber/index.m3u8"}, {"id": "765", "name": "minika Cocuk", "is_epg": true, "kategori": "ÇOCUK", "hls": "https://trn03.tulix.tv/gt-minikacocuk/index.m3u8"}, {"id": "766", "name": "minika GO", "is_epg": true, "kategori": "ÇOCUK", "hls": "https://trn03.tulix.tv/gt-minikago/index.m3u8"}];
         const KATEGORILER = ["HABER", "SPOR", "DİĞER", "ULUSAL", "ÇOCUK", "YEREL"];
-        
         const PLIST_BASE = 'https://ginikoturkish.com/xml/secure/plist.php?ch=';
         let currentChannel = null;
         let epgData = [];
@@ -549,7 +538,6 @@
         let isDragging = false;
         let aktifKategori = 'TÜMÜ';
 
-        // DOM
         const video = document.getElementById('video');
         const channelSelect = document.getElementById('channelSelect');
         const epgList = document.getElementById('epgList');
@@ -571,16 +559,11 @@
         const loadingOverlay = document.getElementById('loadingOverlay');
         const errorOverlay = document.getElementById('errorOverlay');
         const playerWrapper = document.getElementById('playerWrapper');
-        const kategoriBar = document.getElementById('kategoriBar');
 
-        // ============================================================
-        // 1. KANAL LİSTESİNİ DOLDUR
-        // ============================================================
         function populateChannels() {
             channelCount.textContent = KANALLAR.length;
-            totalCount.textContent = '128';
-            updateTime.textContent = '19.07.2026 22:08';
-            
+            totalCount.textContent = '36';
+            updateTime.textContent = '19.07.2026 22:19';
             channelSelect.innerHTML = '<option value="">📡 Kanal Seç</option>';
             KANALLAR.forEach(k => {
                 const opt = document.createElement('option');
@@ -589,23 +572,15 @@
                 opt.textContent = k.name;
                 channelSelect.appendChild(opt);
             });
-            
             statusText.textContent = '✅ Kanal seçiniz';
             console.log(`${KANALLAR.length} EPG kanalı yüklendi.`);
         }
 
-        // ============================================================
-        // 2. KATEGORİ FİLTRE
-        // ============================================================
         function kanalFiltrele(kategori) {
             aktifKategori = kategori;
-            
-            // Butonları güncelle
             document.querySelectorAll('.kat-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.kat === kategori);
             });
-            
-            // Select'teki optionları filtrele
             const options = channelSelect.querySelectorAll('option');
             let gosterilen = 0;
             options.forEach(opt => {
@@ -618,14 +593,10 @@
                     opt.style.display = 'none';
                 }
             });
-            
-            // Select'teki gösterilen sayısını güncelle
             const placeholder = channelSelect.querySelector('option[value=""]');
             if (placeholder) {
                 placeholder.textContent = `📡 Kanal Seç (${gosterilen} kanal)`;
             }
-            
-            // Seçili kanal filtre dışındaysa sıfırla
             const secili = channelSelect.value;
             if (secili) {
                 const seciliOpt = channelSelect.querySelector(`option[value="${secili}"]`);
@@ -642,25 +613,19 @@
             }
         }
 
-        // Kategori butonlarına tıklama
         document.querySelectorAll('.kat-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 kanalFiltrele(this.dataset.kat);
             });
         });
 
-        // ============================================================
-        // 3. KANAL YÜKLE
-        // ============================================================
         async function loadChannel(channelId) {
             if (!channelId) return;
-            
             const kanal = KANALLAR.find(k => k.id === channelId);
             if (!kanal) {
                 statusText.textContent = '❌ Kanal bulunamadı!';
                 return;
             }
-            
             if (kanal.url) {
                 currentChannel = { id: channelId, hlsUrl: kanal.url };
                 channelNameDisplay.textContent = kanal.name;
@@ -669,10 +634,8 @@
                 fetchEpg(channelId);
                 return;
             }
-            
             showLoading(true);
             hideError();
-            
             try {
                 statusText.textContent = '⏳ Yayın bilgisi alınıyor...';
                 const url = PLIST_BASE + channelId;
@@ -680,7 +643,6 @@
                 const text = await response.text();
                 const parser = new DOMParser();
                 const xml = parser.parseFromString(text, 'text/xml');
-
                 const strings = xml.querySelectorAll('string');
                 let hlsUrl = null;
                 for (const s of strings) {
@@ -690,7 +652,6 @@
                         break;
                     }
                 }
-
                 const epgItems = [];
                 const dicts = xml.querySelectorAll('dict');
                 for (const dict of dicts) {
@@ -716,15 +677,12 @@
                         });
                     }
                 }
-
                 if (epgItems.length > 0) {
                     epgItems[0].isActive = true;
                 }
-
                 epgData = epgItems;
                 epgCount.textContent = `${epgItems.length} program`;
                 renderEpg(epgItems);
-
                 if (hlsUrl) {
                     currentChannel = { id: channelId, hlsUrl };
                     channelNameDisplay.textContent = kanal.name;
@@ -734,7 +692,6 @@
                     statusText.textContent = '⚠️ Bu kanal için yayın linki bulunamadı.';
                     showError('Yayın linki bulunamadı');
                 }
-
             } catch (e) {
                 console.error(e);
                 statusText.textContent = '❌ Kanal bilgisi alınamadı!';
@@ -744,9 +701,6 @@
             }
         }
 
-        // ============================================================
-        // 4. EPG ÇEK
-        // ============================================================
         async function fetchEpg(channelId) {
             try {
                 const url = PLIST_BASE + channelId;
@@ -754,7 +708,6 @@
                 const text = await response.text();
                 const parser = new DOMParser();
                 const xml = parser.parseFromString(text, 'text/xml');
-
                 const epgItems = [];
                 const dicts = xml.querySelectorAll('dict');
                 for (const dict of dicts) {
@@ -780,7 +733,6 @@
                         });
                     }
                 }
-
                 if (epgItems.length > 0) {
                     epgItems[0].isActive = true;
                 }
@@ -792,15 +744,11 @@
             }
         }
 
-        // ============================================================
-        // 5. VİDEO OYNATICI
-        // ============================================================
         function playVideo(url) {
             if (hls) {
                 hls.destroy();
                 hls = null;
             }
-
             if (Hls.isSupported()) {
                 hls = new Hls({
                     enableWorker: true,
@@ -832,15 +780,11 @@
             }
         }
 
-        // ============================================================
-        // 6. EPG
-        // ============================================================
         function renderEpg(items) {
             if (!items || items.length === 0) {
                 epgList.innerHTML = `<div class="no-epg">📋 EPG bilgisi bulunamadı.</div>`;
                 return;
             }
-
             let html = '';
             items.forEach((item, index) => {
                 const activeClass = item.isActive ? 'active' : '';
@@ -857,9 +801,7 @@
                     </div>
                 `;
             });
-
             epgList.innerHTML = html;
-
             document.querySelectorAll('.epg-item .play-btn').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
@@ -874,7 +816,6 @@
                     }
                 });
             });
-
             document.querySelectorAll('.epg-item').forEach(el => {
                 el.addEventListener('click', function() {
                     const idx = parseInt(this.dataset.index);
@@ -891,9 +832,6 @@
             });
         }
 
-        // ============================================================
-        // 7. KONTROLLER
-        // ============================================================
         function updatePlayButton() {
             const icon = playBtn.querySelector('i');
             if (video.paused) {
@@ -947,9 +885,6 @@
             }
         }
 
-        // ============================================================
-        // 8. OLAY BAĞLAMALARI
-        // ============================================================
         channelSelect.addEventListener('change', function() {
             const id = this.value;
             if (id) {
@@ -1063,14 +998,10 @@
             }
         });
 
-        // ============================================================
-        // 9. BAŞLAT
-        // ============================================================
         populateChannels();
         console.log('📺 Mutlu TV başlatıldı!');
         console.log(`📡 ${KANALLAR.length} EPG kanalı hazır.`);
         console.log(`📊 Kategoriler: ${KATEGORILER.join(', ')}`);
     </script>
-
 </body>
 </html>
