@@ -7,7 +7,6 @@
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* (CSS kodu aynı - önceki mesajdaki gibi) */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -46,6 +45,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            flex-wrap: wrap;
         }
         .header .info .dot {
             width: 8px; height: 8px;
@@ -256,12 +256,43 @@
             50% { opacity: 0.2; }
         }
         
+        /* KATEGORİ BUTONLARI */
+        .kategori-bar {
+            background: #111;
+            padding: 8px 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            border-bottom: 1px solid #222;
+            overflow-x: auto;
+        }
+        .kategori-bar .kat-btn {
+            padding: 4px 12px;
+            background: #1a1a2e;
+            color: #888;
+            border: 1px solid #333;
+            border-radius: 20px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+        .kategori-bar .kat-btn:hover {
+            background: #2a2a4a;
+            color: #fff;
+        }
+        .kategori-bar .kat-btn.active {
+            background: #e50914;
+            color: #fff;
+            border-color: #e50914;
+        }
+        
         .epg-container {
             background: #111;
             padding: 12px 15px;
             flex: 1;
             overflow-y: auto;
-            max-height: 35vh;
+            max-height: 30vh;
             border-top: 1px solid #222;
         }
         .epg-container .epg-header {
@@ -408,6 +439,7 @@
             .epg-item .info .desc { font-size: 10px; }
             .epg-container .epg-header h3 { font-size: 13px; }
             .player-wrapper { aspect-ratio: 16/9; max-height: 50vh; }
+            .kategori-bar .kat-btn { font-size: 10px; padding: 3px 10px; }
         }
         @media (max-width: 400px) {
             .header h1 { font-size: 14px; }
@@ -426,9 +458,11 @@
         <h1><i class="fas fa-tv"></i> Mutlu TV</h1>
         <div class="info">
             <span class="dot"></span>
-            <span id="channelCount">0</span> kanal
+            <span id="channelCount">0</span> EPG kanal
             <span>•</span>
-            <i class="far fa-clock"></i> <span id="updateTime">19.07.2026 22:03</span>
+            <span id="totalCount">128</span> toplam kanal
+            <span>•</span>
+            <i class="far fa-clock"></i> <span id="updateTime">19.07.2026 22:08</span>
         </div>
     </div>
 
@@ -484,6 +518,12 @@
         <span class="status" id="statusText">⏳ Hazırlanıyor...</span>
     </div>
 
+    <!-- KATEGORİ FİLTRE -->
+    <div class="kategori-bar" id="kategoriBar">
+        <button class="kat-btn active" data-kat="TÜMÜ">TÜMÜ (50)</button>
+        <button class="kat-btn" data-kat="DİĞER">DİĞER (10)</button> <button class="kat-btn" data-kat="HABER">HABER (7)</button> <button class="kat-btn" data-kat="SPOR">SPOR (3)</button> <button class="kat-btn" data-kat="ULUSAL">ULUSAL (22)</button> <button class="kat-btn" data-kat="YEREL">YEREL (5)</button> <button class="kat-btn" data-kat="ÇOCUK">ÇOCUK (3)</button> 
+    </div>
+
     <div class="epg-container" id="epgContainer">
         <div class="epg-header">
             <h3><i class="fas fa-list-ul"></i> Yayın Akışı</h3>
@@ -496,9 +536,10 @@
 
     <script>
         // ============================================================
-        // KANAL VERİLERİ (SADECE EPG OLANLAR)
+        // KANAL VERİLERİ
         // ============================================================
-        const KANALLAR = [{"id": "775", "name": "A Haber -", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-ahabertv/index.m3u8"}, {"id": "822", "name": "A Spor", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-aspor/index.m3u8"}, {"id": "744", "name": "A2", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-atv-a2tv/index.m3u8"}, {"id": "816", "name": "ATV", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-atv-live/index.m3u8"}, {"id": "805", "name": "ATV Avrupa", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-atv-avrupa-tv/index.m3u8"}, {"id": "739", "name": "Beyaz TV", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-beyaztv/index.m3u8"}, {"id": "782", "name": "CBC Sport Azerbaijan", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-cbcsport/index.m3u8"}, {"id": "770", "name": "CNN Turk", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-cnnturk-tv/index.m3u8"}, {"id": "768", "name": "Cartoon Network TR", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-cartoontr/index.m3u8"}, {"id": "760", "name": "Diyanet TV", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-trtdiyanet/index.m3u8"}, {"id": "776", "name": "EkoTurk", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-ekoturk/index.m3u8"}, {"id": "962", "name": "Fox 5", "is_epg": true, "hls": "https://glb.bozztv.com/glb/hondu/hondu-rick-fox5/index.m3u8"}, {"id": "772", "name": "Haber Global", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-haber-globaltv/index.m3u8"}, {"id": "771", "name": "Haber Turk", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-haberturktv/index.m3u8"}, {"id": "802", "name": "Halk TV", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-halk-tvs/index.m3u8"}, {"id": "781", "name": "Idman TV", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-idmantv/index.m3u8"}, {"id": "773", "name": "KRT Kultur TV", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-krt--tv/index.m3u8"}, {"id": "777", "name": "Kanal 24", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-kanal24/index.m3u8"}, {"id": "740", "name": "Kanal 7", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-kanal7/index.m3u8"}, {"id": "734", "name": "Kanal D", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-kanald-1tv/index.m3u8"}, {"id": "718", "name": "NOW TV", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-nowtv-live/index.m3u8"}, {"id": "769", "name": "NTV", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-ntv-tv/index.m3u8"}, {"id": "736", "name": "Show Max", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-showmax/index.m3u8"}, {"id": "735", "name": "Show TV", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-shows-tv/index.m3u8"}, {"id": "742", "name": "Sky 360", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-sky360/index.m3u8"}, {"id": "872", "name": "Sozcu TV", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-sozcu-livetv/index.m3u8"}, {"id": "754", "name": "Sports TV", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-sporttv/index.m3u8"}, {"id": "723", "name": "Star TV", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-star-tv1/index.m3u8"}, {"id": "745", "name": "TLC Turkiye", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-tlc-tv/index.m3u8"}, {"id": "787", "name": "TRT 1", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-trt1/index.m3u8"}, {"id": "891", "name": "TRT 2", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-trt2/index.m3u8"}, {"id": "762", "name": "TRT Belgesel", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-trtbelgesel/index.m3u8"}, {"id": "812", "name": "TRT Cocuk", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-trtcocuk/index.m3u8"}, {"id": "778", "name": "TRT Haber", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-trthaber/index.m3u8"}, {"id": "811", "name": "TRT Muzik", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-trtmusic/index.m3u8"}, {"id": "785", "name": "TRT Spor", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-trt-sportv/index.m3u8"}, {"id": "749", "name": "TRT Spor Yildiz", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-trt-spor2/index.m3u8"}, {"id": "808", "name": "TRT Turk", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-trtturk/index.m3u8"}, {"id": "779", "name": "TRT World", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-trtworld/index.m3u8"}, {"id": "738", "name": "TV100", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-tv100/index.m3u8"}, {"id": "818", "name": "TV8", "is_epg": true, "hls": "https://trn03.tulix.tv/tv8-hd-tv/index.m3u8"}, {"id": "806", "name": "TV8  Int", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-tv8international/index.m3u8"}, {"id": "733", "name": "TV8.5", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-tv8_5/index.m3u8"}, {"id": "780", "name": "TVNET", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-tvnettv/index.m3u8"}, {"id": "815", "name": "Ulke TV", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-ulketv/index.m3u8"}, {"id": "774", "name": "Ulusal TV", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-ulusal-tv/index.m3u8"}, {"id": "761", "name": "Yaban TV", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-yabantv/index.m3u8"}, {"id": "751", "name": "beIN Sports Haber", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-beinsportshaber/index.m3u8"}, {"id": "765", "name": "minika Cocuk", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-minikacocuk/index.m3u8"}, {"id": "766", "name": "minika GO", "is_epg": true, "hls": "https://trn03.tulix.tv/gt-minikago/index.m3u8"}];
+        const KANALLAR = [{"id": "775", "name": "A Haber -", "is_epg": true, "kategori": "HABER", "hls": "https://trn03.tulix.tv/gt-ahabertv/index.m3u8"}, {"id": "822", "name": "A Spor", "is_epg": true, "kategori": "SPOR", "hls": "https://trn03.tulix.tv/gt-aspor/index.m3u8"}, {"id": "744", "name": "A2", "is_epg": true, "kategori": "DİĞER", "hls": "https://trn03.tulix.tv/gt-atv-a2tv/index.m3u8"}, {"id": "816", "name": "ATV", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-atv-live/index.m3u8"}, {"id": "805", "name": "ATV Avrupa", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-atv-avrupa-tv/index.m3u8"}, {"id": "739", "name": "Beyaz TV", "is_epg": true, "kategori": "DİĞER", "hls": "https://trn03.tulix.tv/gt-beyaztv/index.m3u8"}, {"id": "782", "name": "CBC Sport Azerbaijan", "is_epg": true, "kategori": "SPOR", "hls": "https://trn03.tulix.tv/gt-cbcsport/index.m3u8"}, {"id": "770", "name": "CNN Turk", "is_epg": true, "kategori": "HABER", "hls": "https://trn03.tulix.tv/gt-cnnturk-tv/index.m3u8"}, {"id": "768", "name": "Cartoon Network TR", "is_epg": true, "kategori": "ÇOCUK", "hls": "https://trn03.tulix.tv/gt-cartoontr/index.m3u8"}, {"id": "760", "name": "Diyanet TV", "is_epg": true, "kategori": "DİĞER", "hls": "https://trn03.tulix.tv/gt-trtdiyanet/index.m3u8"}, {"id": "776", "name": "EkoTurk", "is_epg": true, "kategori": "YEREL", "hls": "https://trn03.tulix.tv/gt-ekoturk/index.m3u8"}, {"id": "962", "name": "Fox 5", "is_epg": true, "kategori": "ULUSAL", "hls": "https://glb.bozztv.com/glb/hondu/hondu-rick-fox5/index.m3u8"}, {"id": "772", "name": "Haber Global", "is_epg": true, "kategori": "HABER", "hls": "https://trn03.tulix.tv/gt-haber-globaltv/index.m3u8"}, {"id": "771", "name": "Haber Turk", "is_epg": true, "kategori": "HABER", "hls": "https://trn03.tulix.tv/gt-haberturktv/index.m3u8"}, {"id": "802", "name": "Halk TV", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-halk-tvs/index.m3u8"}, {"id": "781", "name": "Idman TV", "is_epg": true, "kategori": "DİĞER", "hls": "https://trn03.tulix.tv/gt-idmantv/index.m3u8"}, {"id": "773", "name": "KRT Kultur TV", "is_epg": true, "kategori": "YEREL", "hls": "https://trn03.tulix.tv/gt-krt--tv/index.m3u8"}, {"id": "777", "name": "Kanal 24", "is_epg": true, "kategori": "YEREL", "hls": "https://trn03.tulix.tv/gt-kanal24/index.m3u8"}, {"id": "740", "name": "Kanal 7", "is_epg": true, "kategori": "YEREL", "hls": "https://trn03.tulix.tv/gt-kanal7/index.m3u8"}, {"id": "734", "name": "Kanal D", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-kanald-1tv/index.m3u8"}, {"id": "718", "name": "NOW TV", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-nowtv-live/index.m3u8"}, {"id": "769", "name": "NTV", "is_epg": true, "kategori": "HABER", "hls": "https://trn03.tulix.tv/gt-ntv-tv/index.m3u8"}, {"id": "736", "name": "Show Max", "is_epg": true, "kategori": "DİĞER", "hls": "https://trn03.tulix.tv/gt-showmax/index.m3u8"}, {"id": "735", "name": "Show TV", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-shows-tv/index.m3u8"}, {"id": "742", "name": "Sky 360", "is_epg": true, "kategori": "YEREL", "hls": "https://trn03.tulix.tv/gt-sky360/index.m3u8"}, {"id": "872", "name": "Sozcu TV", "is_epg": true, "kategori": "DİĞER", "hls": "https://trn03.tulix.tv/gt-sozcu-livetv/index.m3u8"}, {"id": "754", "name": "Sports TV", "is_epg": true, "kategori": "SPOR", "hls": "https://trn03.tulix.tv/gt-sporttv/index.m3u8"}, {"id": "723", "name": "Star TV", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-star-tv1/index.m3u8"}, {"id": "745", "name": "TLC Turkiye", "is_epg": true, "kategori": "DİĞER", "hls": "https://trn03.tulix.tv/gt-tlc-tv/index.m3u8"}, {"id": "787", "name": "TRT 1", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-trt1/index.m3u8"}, {"id": "891", "name": "TRT 2", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-trt2/index.m3u8"}, {"id": "762", "name": "TRT Belgesel", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-trtbelgesel/index.m3u8"}, {"id": "812", "name": "TRT Cocuk", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-trtcocuk/index.m3u8"}, {"id": "778", "name": "TRT Haber", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-trthaber/index.m3u8"}, {"id": "811", "name": "TRT Muzik", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-trtmusic/index.m3u8"}, {"id": "785", "name": "TRT Spor", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-trt-sportv/index.m3u8"}, {"id": "749", "name": "TRT Spor Yildiz", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-trt-spor2/index.m3u8"}, {"id": "808", "name": "TRT Turk", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-trtturk/index.m3u8"}, {"id": "779", "name": "TRT World", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-trtworld/index.m3u8"}, {"id": "738", "name": "TV100", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-tv100/index.m3u8"}, {"id": "818", "name": "TV8", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/tv8-hd-tv/index.m3u8"}, {"id": "806", "name": "TV8  Int", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-tv8international/index.m3u8"}, {"id": "733", "name": "TV8.5", "is_epg": true, "kategori": "ULUSAL", "hls": "https://trn03.tulix.tv/gt-tv8_5/index.m3u8"}, {"id": "780", "name": "TVNET", "is_epg": true, "kategori": "DİĞER", "hls": "https://trn03.tulix.tv/gt-tvnettv/index.m3u8"}, {"id": "815", "name": "Ulke TV", "is_epg": true, "kategori": "DİĞER", "hls": "https://trn03.tulix.tv/gt-ulketv/index.m3u8"}, {"id": "774", "name": "Ulusal TV", "is_epg": true, "kategori": "HABER", "hls": "https://trn03.tulix.tv/gt-ulusal-tv/index.m3u8"}, {"id": "761", "name": "Yaban TV", "is_epg": true, "kategori": "DİĞER", "hls": "https://trn03.tulix.tv/gt-yabantv/index.m3u8"}, {"id": "751", "name": "beIN Sports Haber", "is_epg": true, "kategori": "HABER", "hls": "https://trn03.tulix.tv/gt-beinsportshaber/index.m3u8"}, {"id": "765", "name": "minika Cocuk", "is_epg": true, "kategori": "ÇOCUK", "hls": "https://trn03.tulix.tv/gt-minikacocuk/index.m3u8"}, {"id": "766", "name": "minika GO", "is_epg": true, "kategori": "ÇOCUK", "hls": "https://trn03.tulix.tv/gt-minikago/index.m3u8"}];
+        const KATEGORILER = ["HABER", "SPOR", "DİĞER", "ULUSAL", "ÇOCUK", "YEREL"];
         
         const PLIST_BASE = 'https://ginikoturkish.com/xml/secure/plist.php?ch=';
         let currentChannel = null;
@@ -506,6 +547,7 @@
         let hls = null;
         let isPlaying = false;
         let isDragging = false;
+        let aktifKategori = 'TÜMÜ';
 
         // DOM
         const video = document.getElementById('video');
@@ -514,6 +556,7 @@
         const statusText = document.getElementById('statusText');
         const reloadBtn = document.getElementById('reloadBtn');
         const channelCount = document.getElementById('channelCount');
+        const totalCount = document.getElementById('totalCount');
         const updateTime = document.getElementById('updateTime');
         const epgCount = document.getElementById('epgCount');
         const channelNameDisplay = document.getElementById('channelNameDisplay');
@@ -528,17 +571,21 @@
         const loadingOverlay = document.getElementById('loadingOverlay');
         const errorOverlay = document.getElementById('errorOverlay');
         const playerWrapper = document.getElementById('playerWrapper');
+        const kategoriBar = document.getElementById('kategoriBar');
 
         // ============================================================
         // 1. KANAL LİSTESİNİ DOLDUR
         // ============================================================
         function populateChannels() {
             channelCount.textContent = KANALLAR.length;
+            totalCount.textContent = '128';
+            updateTime.textContent = '19.07.2026 22:08';
             
             channelSelect.innerHTML = '<option value="">📡 Kanal Seç</option>';
             KANALLAR.forEach(k => {
                 const opt = document.createElement('option');
                 opt.value = k.id;
+                opt.dataset.kat = k.kategori || 'DİĞER';
                 opt.textContent = k.name;
                 channelSelect.appendChild(opt);
             });
@@ -548,7 +595,62 @@
         }
 
         // ============================================================
-        // 2. KANAL YÜKLE
+        // 2. KATEGORİ FİLTRE
+        // ============================================================
+        function kanalFiltrele(kategori) {
+            aktifKategori = kategori;
+            
+            // Butonları güncelle
+            document.querySelectorAll('.kat-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.kat === kategori);
+            });
+            
+            // Select'teki optionları filtrele
+            const options = channelSelect.querySelectorAll('option');
+            let gosterilen = 0;
+            options.forEach(opt => {
+                if (opt.value === '') return;
+                const kat = opt.dataset.kat || 'DİĞER';
+                if (kategori === 'TÜMÜ' || kat === kategori) {
+                    opt.style.display = '';
+                    gosterilen++;
+                } else {
+                    opt.style.display = 'none';
+                }
+            });
+            
+            // Select'teki gösterilen sayısını güncelle
+            const placeholder = channelSelect.querySelector('option[value=""]');
+            if (placeholder) {
+                placeholder.textContent = `📡 Kanal Seç (${gosterilen} kanal)`;
+            }
+            
+            // Seçili kanal filtre dışındaysa sıfırla
+            const secili = channelSelect.value;
+            if (secili) {
+                const seciliOpt = channelSelect.querySelector(`option[value="${secili}"]`);
+                if (!seciliOpt || seciliOpt.style.display === 'none') {
+                    channelSelect.value = '';
+                    video.pause();
+                    video.src = '';
+                    epgData = [];
+                    renderEpg([]);
+                    statusText.textContent = '✅ Kanal seçiniz';
+                    channelNameDisplay.textContent = 'Kanal Seçiniz';
+                    epgCount.textContent = '0 program';
+                }
+            }
+        }
+
+        // Kategori butonlarına tıklama
+        document.querySelectorAll('.kat-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                kanalFiltrele(this.dataset.kat);
+            });
+        });
+
+        // ============================================================
+        // 3. KANAL YÜKLE
         // ============================================================
         async function loadChannel(channelId) {
             if (!channelId) return;
@@ -583,7 +685,7 @@
                 let hlsUrl = null;
                 for (const s of strings) {
                     const content = s.textContent || '';
-                    if (content.includes('.m3u8') && content.includes('token=')) {
+                    if (content.includes('.m3u8')) {
                         hlsUrl = content;
                         break;
                     }
@@ -643,7 +745,7 @@
         }
 
         // ============================================================
-        // 3. EPG ÇEK
+        // 4. EPG ÇEK
         // ============================================================
         async function fetchEpg(channelId) {
             try {
@@ -691,7 +793,7 @@
         }
 
         // ============================================================
-        // 4. VİDEO OYNATICI
+        // 5. VİDEO OYNATICI
         // ============================================================
         function playVideo(url) {
             if (hls) {
@@ -731,7 +833,7 @@
         }
 
         // ============================================================
-        // 5. EPG
+        // 6. EPG
         // ============================================================
         function renderEpg(items) {
             if (!items || items.length === 0) {
@@ -790,7 +892,7 @@
         }
 
         // ============================================================
-        // 6. KONTROLLER
+        // 7. KONTROLLER
         // ============================================================
         function updatePlayButton() {
             const icon = playBtn.querySelector('i');
@@ -846,7 +948,7 @@
         }
 
         // ============================================================
-        // 7. OLAY BAĞLAMALARI
+        // 8. OLAY BAĞLAMALARI
         // ============================================================
         channelSelect.addEventListener('change', function() {
             const id = this.value;
@@ -962,11 +1064,12 @@
         });
 
         // ============================================================
-        // 8. BAŞLAT
+        // 9. BAŞLAT
         // ============================================================
         populateChannels();
         console.log('📺 Mutlu TV başlatıldı!');
         console.log(`📡 ${KANALLAR.length} EPG kanalı hazır.`);
+        console.log(`📊 Kategoriler: ${KATEGORILER.join(', ')}`);
     </script>
 
 </body>
