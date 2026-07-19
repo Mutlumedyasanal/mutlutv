@@ -459,10 +459,10 @@
             <span class="dot"></span>
             <span id="channelCount">0</span> EPG kanal
             <span>•</span>
-            <span id="totalCount">36</span> toplam
-            <span class="istatistik">| 🔑 0 · 🌐 36</span>
+            <span id="totalCount">128</span> toplam
+            <span class="istatistik">| 🔑 93 · 🌐 35</span>
             <span>•</span>
-            <i class="far fa-clock"></i> <span id="updateTime">19.07.2026 22:19</span>
+            <i class="far fa-clock"></i> <span id="updateTime">19.07.2026 22:30</span>
         </div>
     </div>
 
@@ -562,8 +562,8 @@
 
         function populateChannels() {
             channelCount.textContent = KANALLAR.length;
-            totalCount.textContent = '36';
-            updateTime.textContent = '19.07.2026 22:19';
+            totalCount.textContent = '128';
+            updateTime.textContent = '19.07.2026 22:30';
             channelSelect.innerHTML = '<option value="">📡 Kanal Seç</option>';
             KANALLAR.forEach(k => {
                 const opt = document.createElement('option');
