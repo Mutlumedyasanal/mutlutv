@@ -1,87 +1,71 @@
 #EXTM3U
-
-# KATEGORİ: DİĞER (55 kanal)
-
-#EXTINF:-1 group-title="DİĞER",Beyaz TV (Turkey)
-https://trn03.tulix.tv/gt-beyaztv/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="DİĞER",Diyanet TV (Turkey)
-https://trn03.tulix.tv/gt-trtdiyanet/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="DİĞER",Idman TV (Azerbaijan)
-https://trn03.tulix.tv/gt-idmantv/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="DİĞER",Sozcu TV (Turkey)
-https://trn03.tulix.tv/gt-sozcu-livetv/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-
-# KATEGORİ: HABER (11 kanal)
-
-#EXTINF:-1 group-title="HABER",A Haber (Turkey)
-https://trn03.tulix.tv/gt-ahabertv/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="HABER",CNN Turk (Turkey)
-https://trn03.tulix.tv/gt-cnnturk-tv/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="HABER",Haber Global (Turkey)
-https://trn03.tulix.tv/gt-haber-globaltv/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="HABER",Haber Turk (Turkey)
-https://trn03.tulix.tv/gt-haberturktv/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="HABER",NTV (Turkey)
-https://trn03.tulix.tv/gt-ntv-tv/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="HABER",beIN Sports Haber (Turkey)
-https://trn03.tulix.tv/gt-beinsportshaber/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-
-# KATEGORİ: MÜZİK (3 kanal)
-
-
-# KATEGORİ: SPOR (3 kanal)
-
-#EXTINF:-1 group-title="SPOR",A Spor (Turkey)
-https://trn03.tulix.tv/gt-aspor/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-
-# KATEGORİ: ULUSAL (37 kanal)
-
-#EXTINF:-1 group-title="ULUSAL",ATV (Turkey)
-https://trn03.tulix.tv/gt-atv-live/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="ULUSAL",ATV Avrupa (Turkey)
-https://trn03.tulix.tv/gt-atv-avrupa-tv/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="ULUSAL",Halk TV (Turkey)
-https://trn03.tulix.tv/gt-halk-tvs/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="ULUSAL",Kanal D (Turkey)
-https://trn03.tulix.tv/gt-kanald-1tv/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="ULUSAL",NOW TV (Turkey)
-https://trn03.tulix.tv/gt-nowtv-live/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="ULUSAL",Show TV (Turkey)
-https://trn03.tulix.tv/gt-shows-tv/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="ULUSAL",Star TV (Turkey)
-https://trn03.tulix.tv/gt-star-tv1/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="ULUSAL",TRT Belgesel (Turkey)
-https://trn03.tulix.tv/gt-trtbelgesel/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="ULUSAL",TRT Haber (Turkey)
-https://trn03.tulix.tv/gt-trthaber/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="ULUSAL",TRT Muzik (Turkey)
-https://trn03.tulix.tv/gt-trtmusic/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="ULUSAL",TRT Spor (Turkey)
-https://trn03.tulix.tv/gt-trt-sportv/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="ULUSAL",TRT Spor Yildiz (Turkey)
-https://trn03.tulix.tv/gt-trt-spor2/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="ULUSAL",TRT Turk (Turkey)
-https://trn03.tulix.tv/gt-trtturk/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="ULUSAL",TRT World (Turkey)
-https://trn03.tulix.tv/gt-trtworld/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="ULUSAL",TRT1 - HD (Turkey)
-https://trn03.tulix.tv/gt-trt1/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="ULUSAL",TV100 (Turkey)
-https://trn03.tulix.tv/gt-tv100/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="ULUSAL",TV8 (Turkey)
-https://trn03.tulix.tv/tv8-hd-tv/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="ULUSAL",TV8 Int (Turkey)
-https://trn03.tulix.tv/gt-tv8international/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="ULUSAL",TV8.5 (Turkey)
-https://trn03.tulix.tv/gt-tv8_5/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-
-# KATEGORİ: YEREL (23 kanal)
-
-#EXTINF:-1 group-title="YEREL",KRT Kultur TV (Turkey)
-https://trn03.tulix.tv/gt-krt--tv/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="YEREL",Kanal 24 (Turkey)
-https://trn03.tulix.tv/gt-kanal24/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="YEREL",Kanal 7 (Turkey)
-https://trn03.tulix.tv/gt-kanal7/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
-#EXTINF:-1 group-title="YEREL",SKY 360 (Turkey)
-https://trn03.tulix.tv/gt-sky360/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2
+#EXTINF:-1,A Haber (Turkey)
+https://trn03.tulix.tv/gt-ahabertv/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,A Spor (Turkey)
+https://trn03.tulix.tv/gt-aspor/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,ATV (Turkey)
+https://trn03.tulix.tv/gt-atv-live/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,ATV Avrupa (Turkey)
+https://trn03.tulix.tv/gt-atv-avrupa-tv/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,Beyaz TV (Turkey)
+https://trn03.tulix.tv/gt-beyaztv/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,CNN Turk (Turkey)
+https://trn03.tulix.tv/gt-cnnturk-tv/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,Diyanet TV (Turkey)
+https://trn03.tulix.tv/gt-trtdiyanet/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,Haber Global (Turkey)
+https://trn03.tulix.tv/gt-haber-globaltv/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,Haber Turk (Turkey)
+https://trn03.tulix.tv/gt-haberturktv/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,Halk TV (Turkey)
+https://trn03.tulix.tv/gt-halk-tvs/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,Idman TV (Azerbaijan)
+https://trn03.tulix.tv/gt-idmantv/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,KRT Kultur TV (Turkey)
+https://trn03.tulix.tv/gt-krt--tv/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,Kanal 24 (Turkey)
+https://trn03.tulix.tv/gt-kanal24/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,Kanal 7 (Turkey)
+https://trn03.tulix.tv/gt-kanal7/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,Kanal D (Turkey)
+https://trn03.tulix.tv/gt-kanald-1tv/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,NOW TV (Turkey)
+https://trn03.tulix.tv/gt-nowtv-live/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,NTV (Turkey)
+https://trn03.tulix.tv/gt-ntv-tv/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,SKY 360 (Turkey)
+https://trn03.tulix.tv/gt-sky360/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,Show TV (Turkey)
+https://trn03.tulix.tv/gt-shows-tv/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,Sozcu TV (Turkey)
+https://trn03.tulix.tv/gt-sozcu-livetv/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,Star TV (Turkey)
+https://trn03.tulix.tv/gt-star-tv1/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,TRT Belgesel (Turkey)
+https://trn03.tulix.tv/gt-trtbelgesel/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,TRT Haber (Turkey)
+https://trn03.tulix.tv/gt-trthaber/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,TRT Muzik (Turkey)
+https://trn03.tulix.tv/gt-trtmusic/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,TRT Spor (Turkey)
+https://trn03.tulix.tv/gt-trt-sportv/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,TRT Spor Yildiz (Turkey)
+https://trn03.tulix.tv/gt-trt-spor2/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,TRT Turk (Turkey)
+https://trn03.tulix.tv/gt-trtturk/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,TRT World (Turkey)
+https://trn03.tulix.tv/gt-trtworld/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,TRT1 - HD (Turkey)
+https://trn03.tulix.tv/gt-trt1/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,TV100 (Turkey)
+https://trn03.tulix.tv/gt-tv100/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,TV8 (Turkey)
+https://trn03.tulix.tv/tv8-hd-tv/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,TV8 Int (Turkey)
+https://trn03.tulix.tv/gt-tv8international/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,TV8.5 (Turkey)
+https://trn03.tulix.tv/gt-tv8_5/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,beIN Sports Haber (Turkey)
+https://trn03.tulix.tv/gt-beinsportshaber/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
+#EXTINF:-1,teve 2 (Turkey)
+https://trn03.tulix.tv/gt-teve2/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71
