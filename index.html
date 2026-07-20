@@ -60,7 +60,6 @@
         }
         .header .info span { color: #4caf50; }
         .header .info .istatistik { color: #666; font-size: 9px; }
-        .header .info .token-info { color: #e50914; font-size: 9px; font-weight: 600; }
         
         .player-wrapper {
             position: relative;
@@ -446,9 +445,7 @@
             <span id="totalCount">34</span> toplam
             <span class="istatistik">| 🔑 34 · 🌐 0 · ❌ 98</span>
             <span>•</span>
-            <span class="token-info">🔑 Token 2/3</span>
-            <span>•</span>
-            <i class="far fa-clock"></i> <span id="updateTime">20.07.2026 10:32</span>
+            <i class="far fa-clock"></i> <span id="updateTime">20.07.2026 14:16</span>
         </div>
     </div>
 
@@ -514,7 +511,7 @@
     </div>
 
     <script>
-        const KANALLAR = [{"id": "251", "name": "Beyaz TV (Turkey)", "kategori": "DİĞER", "url": "https://trn03.tulix.tv/gt-beyaztv/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "342", "name": "Diyanet TV (Turkey)", "kategori": "DİĞER", "url": "https://trn03.tulix.tv/gt-trtdiyanet/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "621", "name": "Idman TV (Azerbaijan)", "kategori": "DİĞER", "url": "https://trn03.tulix.tv/gt-idmantv/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "873", "name": "Sozcu TV (Turkey)", "kategori": "DİĞER", "url": "https://trn03.tulix.tv/gt-sozcu-livetv/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "255", "name": "A Haber (Turkey)", "kategori": "HABER", "url": "https://trn03.tulix.tv/gt-ahabertv/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "294", "name": "CNN Turk (Turkey)", "kategori": "HABER", "url": "https://trn03.tulix.tv/gt-cnnturk-tv/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "492", "name": "Haber Global (Turkey)", "kategori": "HABER", "url": "https://trn03.tulix.tv/gt-haber-globaltv/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "327", "name": "Haber Turk (Turkey)", "kategori": "HABER", "url": "https://trn03.tulix.tv/gt-haberturktv/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "4", "name": "NTV (Turkey)", "kategori": "HABER", "url": "https://trn03.tulix.tv/gt-ntv-tv/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "829", "name": "beIN Sports Haber (Turkey)", "kategori": "HABER", "url": "https://trn03.tulix.tv/gt-beinsportshaber/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "253", "name": "A Spor (Turkey)", "kategori": "SPOR", "url": "https://trn03.tulix.tv/gt-aspor/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "154", "name": "ATV (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-atv-live/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "460", "name": "ATV Avrupa (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-atv-avrupa-tv/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "539", "name": "Halk TV (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-halk-tvs/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "500", "name": "Kanal D (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-kanald-1tv/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "295", "name": "NOW TV (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-nowtv-live/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "847", "name": "Show TV (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-shows-tv/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "146", "name": "Star TV (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-star-tv1/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "344", "name": "TRT Belgesel (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-trtbelgesel/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "115", "name": "TRT Haber (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-trthaber/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "20", "name": "TRT Muzik (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-trtmusic/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "35", "name": "TRT Spor (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-trt-sportv/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "442", "name": "TRT Spor Yildiz (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-trt-spor2/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "356", "name": "TRT Turk (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-trtturk/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "788", "name": "TRT World (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-trtworld/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "977", "name": "TRT1 - HD (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-trt1/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "425", "name": "TV100 (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-tv100/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "937", "name": "TV8 (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/tv8-hd-tv/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "459", "name": "TV8 Int (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-tv8international/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "953", "name": "TV8.5 (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-tv8_5/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "496", "name": "KRT Kultur TV (Turkey)", "kategori": "YEREL", "url": "https://trn03.tulix.tv/gt-krt--tv/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "375", "name": "Kanal 24 (Turkey)", "kategori": "YEREL", "url": "https://trn03.tulix.tv/gt-kanal24/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "298", "name": "Kanal 7 (Turkey)", "kategori": "YEREL", "url": "https://trn03.tulix.tv/gt-kanal7/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}, {"id": "328", "name": "SKY 360 (Turkey)", "kategori": "YEREL", "url": "https://trn03.tulix.tv/gt-sky360/index.m3u8?token=f89495a0f5d69ffc1d4e887d07defe71"}];
+        const KANALLAR = [{"id": "251", "name": "Beyaz TV (Turkey)", "kategori": "DİĞER", "url": "https://trn03.tulix.tv/gt-beyaztv/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "342", "name": "Diyanet TV (Turkey)", "kategori": "DİĞER", "url": "https://trn03.tulix.tv/gt-trtdiyanet/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "621", "name": "Idman TV (Azerbaijan)", "kategori": "DİĞER", "url": "https://trn03.tulix.tv/gt-idmantv/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "873", "name": "Sozcu TV (Turkey)", "kategori": "DİĞER", "url": "https://trn03.tulix.tv/gt-sozcu-livetv/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "255", "name": "A Haber (Turkey)", "kategori": "HABER", "url": "https://trn03.tulix.tv/gt-ahabertv/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "294", "name": "CNN Turk (Turkey)", "kategori": "HABER", "url": "https://trn03.tulix.tv/gt-cnnturk-tv/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "492", "name": "Haber Global (Turkey)", "kategori": "HABER", "url": "https://trn03.tulix.tv/gt-haber-globaltv/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "327", "name": "Haber Turk (Turkey)", "kategori": "HABER", "url": "https://trn03.tulix.tv/gt-haberturktv/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "4", "name": "NTV (Turkey)", "kategori": "HABER", "url": "https://trn03.tulix.tv/gt-ntv-tv/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "829", "name": "beIN Sports Haber (Turkey)", "kategori": "HABER", "url": "https://trn03.tulix.tv/gt-beinsportshaber/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "253", "name": "A Spor (Turkey)", "kategori": "SPOR", "url": "https://trn03.tulix.tv/gt-aspor/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "154", "name": "ATV (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-atv-live/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "460", "name": "ATV Avrupa (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-atv-avrupa-tv/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "539", "name": "Halk TV (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-halk-tvs/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "500", "name": "Kanal D (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-kanald-1tv/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "295", "name": "NOW TV (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-nowtv-live/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "847", "name": "Show TV (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-shows-tv/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "146", "name": "Star TV (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-star-tv1/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "344", "name": "TRT Belgesel (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-trtbelgesel/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "115", "name": "TRT Haber (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-trthaber/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "20", "name": "TRT Muzik (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-trtmusic/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "35", "name": "TRT Spor (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-trt-sportv/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "442", "name": "TRT Spor Yildiz (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-trt-spor2/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "356", "name": "TRT Turk (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-trtturk/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "788", "name": "TRT World (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-trtworld/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "977", "name": "TRT1 - HD (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-trt1/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "425", "name": "TV100 (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-tv100/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "937", "name": "TV8 (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/tv8-hd-tv/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "459", "name": "TV8 Int (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-tv8international/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "953", "name": "TV8.5 (Turkey)", "kategori": "ULUSAL", "url": "https://trn03.tulix.tv/gt-tv8_5/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "496", "name": "KRT Kultur TV (Turkey)", "kategori": "YEREL", "url": "https://trn03.tulix.tv/gt-krt--tv/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "375", "name": "Kanal 24 (Turkey)", "kategori": "YEREL", "url": "https://trn03.tulix.tv/gt-kanal24/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "298", "name": "Kanal 7 (Turkey)", "kategori": "YEREL", "url": "https://trn03.tulix.tv/gt-kanal7/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}, {"id": "328", "name": "SKY 360 (Turkey)", "kategori": "YEREL", "url": "https://trn03.tulix.tv/gt-sky360/index.m3u8?token=144de1fe226e7d3c145cbff4df0c03c2"}];
         let currentChannel = null;
         let hls = null;
         let isPlaying = false;
@@ -546,7 +543,7 @@
         function populateChannels() {
             channelCount.textContent = KANALLAR.length;
             totalCount.textContent = '34';
-            updateTime.textContent = '20.07.2026 10:32';
+            updateTime.textContent = '20.07.2026 14:16';
             
             channelSelect.innerHTML = '<option value="">📡 Kanal Seç</option>';
             KANALLAR.forEach(k => {
@@ -687,16 +684,39 @@
             showLoading(true);
             hideError();
             
+            // CORS sorununu aşmak için proxy kullan
+            let finalUrl = url;
+            
+            // Eğer URL trn03.tulix.tv içeriyorsa ve token yoksa ekle
+            if (url.includes('trn03.tulix.tv') && !url.includes('token=')) {
+                // Token'ı URL'den çekmeye çalış
+                const tokenMatch = url.match(/token=([a-f0-9]+)/);
+                if (!tokenMatch) {
+                    // Token yoksa hata ver
+                    showError('Token eksik!');
+                    statusText.textContent = '❌ Token eksik!';
+                    showLoading(false);
+                    return;
+                }
+            }
+            
             if (Hls.isSupported()) {
                 hls = new Hls({
                     enableWorker: true,
                     lowLatencyMode: true,
                     maxBufferLength: 10,
+                    xhrSetup: function(xhr, url) {
+                        // CORS için ek header'lar
+                        xhr.withCredentials = false;
+                    }
                 });
-                hls.loadSource(url);
+                hls.loadSource(finalUrl);
                 hls.attachMedia(video);
                 hls.on(Hls.Events.MANIFEST_PARSED, function() {
-                    video.play().catch(e => console.log('Otomatik oynatma engellendi.'));
+                    video.play().catch(e => {
+                        console.log('Otomatik oynatma engellendi:', e);
+                        // Kullanıcı tıklaması beklenir
+                    });
                     isPlaying = true;
                     updatePlayButton();
                     showLoading(false);
@@ -710,8 +730,10 @@
                     }
                 });
             } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                video.src = url;
-                video.play().catch(e => console.log('Otomatik oynatma engellendi.'));
+                video.src = finalUrl;
+                video.play().catch(e => {
+                    console.log('Otomatik oynatma engellendi:', e);
+                });
                 isPlaying = true;
                 updatePlayButton();
                 showLoading(false);
