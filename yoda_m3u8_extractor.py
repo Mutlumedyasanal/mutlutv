@@ -40,6 +40,18 @@ def get_token_via_selenium():
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--window-size=1920,1080")
     
+    # Chrome path'leri dene
+    chrome_paths = [
+        "/usr/bin/google-chrome",
+        "/usr/bin/chromium-browser",
+        "/usr/bin/chromium"
+    ]
+    
+    for chrome_path in chrome_paths:
+        if os.path.exists(chrome_path):
+            chrome_options.binary_location = chrome_path
+            break
+    
     try:
         service = Service(ChromeDriverManager().install())
         driver = webdriver.Chrome(service=service, options=chrome_options)
@@ -144,6 +156,7 @@ def save_results(results, token):
     print(f"   - Individual channel files: {len([c for c in results.values() if c])} channels")
     print(f"   - Master playlist: master_{timestamp}.m3u8")
     print(f"   - Metadata: metadata_{timestamp}.json")
+    return timestamp
 
 def main():
     """Main function"""
@@ -183,8 +196,9 @@ def main():
     
     # Save results
     if success_count > 0:
-        save_results(results, token)
+        timestamp = save_results(results, token)
         print("✅ Process completed successfully!")
+        print(f"📁 Output files saved with timestamp: {timestamp}")
     else:
         print("❌ No channels were processed successfully.")
         exit(1)
