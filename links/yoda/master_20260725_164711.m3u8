@@ -1,0 +1,13 @@
+#EXTM3U
+
+#EXTINF:-1,AZTV
+https://str.yodacdn.net/azertv/tracks-v1a1/mono.ts.m3u8
+
+#EXTINF:-1,Naxçıvan  TV
+https://str1.yodacdn.net/ntv/tracks-v1a1/mono.ts.m3u8
+
+#EXTINF:-1,Kanal 35
+https://str.yodacdn.net/kanal35/tracks-v1a1/mono.ts.m3u8
+
+#EXTINF:-1,Mədəniyyət
+https://str.yodacdn.net/medeniyyettele/tracks-v1a1/mono.ts.m3u8

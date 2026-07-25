@@ -1,0 +1,37 @@
+{
+  "timestamp": "20260725_164711",
+  "total_channels": 28,
+  "working_count": 4,
+  "working_channels": [
+    "AZTV",
+    "Naxçıvan  TV",
+    "Kanal 35",
+    "Mədəniyyət"
+  ],
+  "failed_channels": [
+    "XƏZƏR",
+    "İctimai",
+    "Baku TV",
+    "İdman TV",
+    "BIZNES TV",
+    "Real TV",
+    "Qafqaz TV",
+    "ATV",
+    "ARB24",
+    "APA TV",
+    "Haber Global",
+    "TMB TV",
+    "TMB Azərbaycan",
+    "ARB",
+    "Kanal S",
+    "ELTV",
+    "ARB GÜNƏŞ",
+    "CBC",
+    "Space",
+    "Vostok TV",
+    "Show Plus TV",
+    "MTV Azerbaijan",
+    "SH TV",
+    "VIP HD"
+  ]
+}
