@@ -31,11 +31,9 @@ def get_channel_config():
         if response.status_code == 200:
             js_content = response.text
             
-            # Find all channel objects
             channels = []
             
             # Pattern to match each channel object
-            # Look for channelID, channelName, channelSource
             pattern = r'\{[^{}]*channelID:\s*"([^"]+)"[^{}]*channelName:\s*"([^"]+)"[^{}]*channelSource:\s*"([^"]+)"[^{}]*\}'
             
             matches = re.findall(pattern, js_content, re.DOTALL)
@@ -127,7 +125,7 @@ def get_token_via_requests():
         return None
 
 def process_channel(channel, token):
-    """Process a single channel"""
+    """Process a single channel - extract all track URLs"""
     slug = channel['slug']
     name = channel['name']
     channel_id = channel['id']
@@ -147,19 +145,27 @@ def process_channel(channel, token):
         if content_response.status_code == 200:
             content = content_response.text
             lines = content.split("\n")
-            modified_content = []
+            modified_lines = []
+            
+            # Base URL for relative paths
+            base_url = re.sub(r'/[^/]+$', '/', source_url)
             
             for line in lines:
                 line = line.strip()
+                
+                # If line is a relative path (not starting with http or #)
                 if line and not line.startswith("#") and not line.startswith("http"):
-                    # Relative path - prepend base URL
-                    base_url = re.sub(r'/[^/]+$', '/', source_url)
-                    full_url = base_url + line
-                    modified_content.append(full_url)
+                    # Fix: add token to the track URL too
+                    track_url = base_url + line
+                    if '?' in track_url:
+                        track_url = f"{track_url}&token={token}"
+                    else:
+                        track_url = f"{track_url}?token={token}"
+                    modified_lines.append(track_url)
                 else:
-                    modified_content.append(line)
+                    modified_lines.append(line)
             
-            return "\n".join(modified_content)
+            return "\n".join(modified_lines)
         else:
             print(f"   ⚠️ Failed: Status {content_response.status_code}")
             return None
@@ -188,11 +194,10 @@ def save_results(results, channels, timestamp):
             if content:
                 name = channel['name']
                 f.write(f'\n#EXTINF:-1,{name}\n')
-                # Extract first track URL
-                match = re.search(r'https://str[0-9]*\.yodacdn\.net/[^/]+/(tracks/[^\n]+)', content)
+                # Extract first track URL (any line starting with http)
+                match = re.search(r'https://str[0-9]*\.yodacdn\.net/[^/]+/[^\n]+\.m3u8', content)
                 if match:
-                    base_url = re.sub(r'/[^/]+$', '/', channel['source'])
-                    f.write(base_url + match.group(1) + "\n")
+                    f.write(match.group(0) + "\n")
     
     # Save metadata
     meta_file = os.path.join(output_dir, f"metadata_{timestamp}.json")
@@ -211,10 +216,6 @@ def save_results(results, channels, timestamp):
     print(f"   - Working: {len(working)}/{len(channels)} channels")
     if failed:
         print(f"   - Failed: {len(failed)} channels")
-        for ch in failed[:5]:  # Show first 5 failed
-            print(f"     • {ch['name']}")
-        if len(failed) > 5:
-            print(f"     • ... and {len(failed)-5} more")
 
 def main():
     """Main function"""
