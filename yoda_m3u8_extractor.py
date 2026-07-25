@@ -8,7 +8,6 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 
-# Directory
 output_dir = "links/yoda"
 os.makedirs(output_dir, exist_ok=True)
 
@@ -46,93 +45,161 @@ def get_token():
         print(f"❌ Error: {e}")
         return None
 
-def get_all_slugs_from_page():
-    """Get all channel slugs from the main page"""
+def get_channel_config():
+    """Get ALL channels from config with CORRECT slugs"""
+    print("📡 Fetching channel config...")
     try:
-        response = requests.get(TOKEN_URL, headers=headers, timeout=15)
+        response = requests.get(CHANNEL_CONFIG_URL, headers=headers, timeout=15)
         if response.status_code == 200:
-            # Look for channel slugs in the page
-            slugs = re.findall(r'data-channel="([a-zA-Z0-9_-]+)"', response.text)
-            return list(set(slugs))  # Remove duplicates
-        return []
-    except:
-        return []
-
-def discover_working_channels(token, slug_list):
-    """Try all possible slugs with token"""
-    working = {}
-    
-    # Test slugs from config + discovered slugs
-    test_slugs = list(set(slug_list))
-    
-    # Add known slugs from your example
-    test_slugs.extend(['tmb_az_app', 'tmbaz', 'tmbtr'])
-    
-    print(f"🔍 Testing {len(test_slugs)} slugs...")
-    
-    for slug in test_slugs:
-        # Try different URL patterns
-        patterns = [
-            f"https://str.yodacdn.net/{slug}/video.m3u8?token={token}",
-            f"https://str.yodacdn.net/{slug}/index.m3u8?token={token}",
-            f"https://str1.yodacdn.net/{slug}/video.m3u8?token={token}",
-        ]
-        
-        for url in patterns:
-            try:
-                response = requests.get(url, headers=headers, timeout=5)
-                if response.status_code == 200:
-                    working[slug] = response.text
-                    print(f"   ✅ {slug} - Working")
-                    break
-            except:
-                continue
-        
-        if slug not in working:
-            print(f"   ❌ {slug} - Failed")
-    
-    return working
-
-def save_results(working_channels, token, timestamp):
-    """Save results"""
-    for slug, content in working_channels.items():
-        # Fix relative paths
-        lines = content.split("\n")
-        fixed_lines = []
-        base_url = f"https://str.yodacdn.net/{slug}/"
-        
-        for line in lines:
-            line = line.strip()
-            if line and not line.startswith("#") and not line.startswith("http"):
-                track_url = base_url + line
-                if '?' in track_url:
-                    track_url = f"{track_url}&token={token}"
+            js_content = response.text
+            
+            # Extract all channel objects
+            channels = []
+            pattern = r'\{[^{}]*channelID:\s*"([^"]+)"[^{}]*channelName:\s*"([^"]+)"[^{}]*channelSource:\s*"([^"]+)"[^{}]*\}'
+            matches = re.findall(pattern, js_content, re.DOTALL)
+            
+            for match in matches:
+                channel_id = match[0]
+                channel_name = match[1]
+                source_url = match[2]
+                
+                # Extract the CORRECT slug from the URL
+                # https://str.yodacdn.net/xazar/video.m3u8 -> xazar
+                # https://str.yodacdn.net/ictimaitv/video.m3u8 -> ictimaitv
+                slug_match = re.search(r'https?://str[0-9]*\.yodacdn\.net/([^/]+)/', source_url)
+                if slug_match:
+                    slug = slug_match.group(1)
                 else:
-                    track_url = f"{track_url}?token={token}"
-                fixed_lines.append(track_url)
-            else:
-                fixed_lines.append(line)
-        
-        filename = os.path.join(output_dir, f"{slug}.m3u8")
-        with open(filename, "w", encoding="utf-8") as f:
-            f.write("\n".join(fixed_lines))
+                    slug = channel_id
+                
+                channels.append({
+                    "id": channel_id,
+                    "name": channel_name,
+                    "slug": slug,
+                    "source": source_url
+                })
+            
+            print(f"✅ Found {len(channels)} channels")
+            return channels
+        else:
+            print(f"❌ Failed: {response.status_code}")
+            return []
+    except Exception as e:
+        print(f"❌ Error: {e}")
+        return []
+
+def process_channel(channel, token):
+    """Process channel with correct slug"""
+    slug = channel['slug']
+    name = channel['name']
+    source_url = channel['source']
     
-    # Master playlist
+    # Use the slug from URL, NOT channelID
+    # Try different URL patterns
+    patterns = [
+        f"https://str.yodacdn.net/{slug}/video.m3u8?token={token}",
+        f"https://str.yodacdn.net/{slug}/index.m3u8?token={token}",
+        f"https://str1.yodacdn.net/{slug}/video.m3u8?token={token}",
+    ]
+    
+    print(f"📡 {name} ({slug})", end=" ")
+    
+    for url in patterns:
+        try:
+            response = requests.get(url, headers=headers, timeout=10)
+            if response.status_code == 200:
+                content = response.text
+                lines = content.split("\n")
+                modified = []
+                base_url = f"https://str.yodacdn.net/{slug}/"
+                
+                for line in lines:
+                    line = line.strip()
+                    if line and not line.startswith("#") and not line.startswith("http"):
+                        track_url = base_url + line
+                        if '?' in track_url:
+                            track_url = f"{track_url}&token={token}"
+                        else:
+                            track_url = f"{track_url}?token={token}"
+                        modified.append(track_url)
+                    else:
+                        modified.append(line)
+                
+                print("✅ OK")
+                return "\n".join(modified)
+        except:
+            continue
+    
+    print("❌ FAILED")
+    return None
+
+def save_results(results, channels, timestamp):
+    """Save results"""
+    # Individual files
+    for channel in channels:
+        channel_id = channel['id']
+        content = results.get(channel_id)
+        if content:
+            filename = os.path.join(output_dir, f"{channel_id}.m3u8")
+            with open(filename, "w", encoding="utf-8") as f:
+                f.write(content)
+    
+    # Master playlist - ALL working channels
     master_file = os.path.join(output_dir, f"master_{timestamp}.m3u8")
     with open(master_file, "w", encoding="utf-8") as f:
         f.write("#EXTM3U\n")
-        for slug, content in working_channels.items():
-            f.write(f'\n#EXTINF:-1,{slug.upper()}\n')
-            match = re.search(r'https://str[0-9]*\.yodacdn\.net/[^/]+/[^\n]+\.m3u8', content)
-            if match:
-                f.write(match.group(0) + "\n")
+        for channel in channels:
+            channel_id = channel['id']
+            content = results.get(channel_id)
+            if content:
+                name = channel['name']
+                f.write(f'\n#EXTINF:-1,{name}\n')
+                match = re.search(r'https://str[0-9]*\.yodacdn\.net/[^/]+/[^\n]+\.m3u8', content)
+                if match:
+                    f.write(match.group(0) + "\n")
     
-    print(f"\n✅ Found {len(working_channels)} working channels")
-    print(f"   Slugs: {', '.join(working_channels.keys())}")
+    # Metadata
+    working = [ch for ch in channels if results.get(ch['id'])]
+    failed = [ch for ch in channels if not results.get(ch['id'])]
+    
+    meta_file = os.path.join(output_dir, f"metadata_{timestamp}.json")
+    with open(meta_file, "w", encoding="utf-8") as f:
+        json.dump({
+            "timestamp": timestamp,
+            "total_channels": len(channels),
+            "working_count": len(working),
+            "working_channels": [{
+                "name": ch['name'],
+                "slug": ch['slug'],
+                "id": ch['id']
+            } for ch in working],
+            "failed_channels": [{
+                "name": ch['name'],
+                "slug": ch['slug'],
+                "id": ch['id']
+            } for ch in failed]
+        }, f, indent=2, ensure_ascii=False)
+    
+    print(f"\n✅ Results saved!")
+    print(f"   Working: {len(working)}/{len(channels)}")
+    if working:
+        print("   Working channels:")
+        for ch in working:
+            print(f"     ✅ {ch['name']} (slug: {ch['slug']})")
+    if failed:
+        print("   Failed channels:")
+        for ch in failed:
+            print(f"     ❌ {ch['name']} (slug: {ch['slug']})")
 
 def main():
-    print("🚀 Starting Yoda Channel Discovery...")
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    print("🚀 Starting Yoda M3U8 Extractor...")
+    print(f"📅 {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print("-" * 50)
+    
+    # Get channels with correct slugs
+    channels = get_channel_config()
+    if not channels:
+        exit(1)
     
     # Get token
     token = get_token()
@@ -140,31 +207,18 @@ def main():
         print("❌ Failed to get token")
         exit(1)
     print(f"✅ Token: {token[:10]}...")
+    print("-" * 50)
     
-    # Get slugs from page
-    slugs = get_all_slugs_from_page()
-    print(f"📺 Found {len(slugs)} slugs in page: {slugs}")
+    # Process ALL channels
+    results = {}
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     
-    # Add manual slugs
-    manual_slugs = [
-        'azertv', 'xazar', 'ictimaitv', 'bakutv', 'idmantele',
-        'biznestv', 'ntv', 'real', 'qafkaz', 'atv', 'arb24',
-        'apatv', 'haberglobal', 'tmbtr', 'tmbaz', 'arb',
-        'start', 'kanal35', 'eltv', 'arbgunesh', 'cbc',
-        'medeniyyettele', 'space', 'tmb', 'showplus',
-        'mtvaz', 'shtv', 'vip', 'tmb_az_app'
-    ]
-    
-    all_slugs = list(set(slugs + manual_slugs))
-    
-    # Discover working channels
-    working = discover_working_channels(token, all_slugs)
+    for channel in channels:
+        content = process_channel(channel, token)
+        results[channel['id']] = content
     
     # Save
-    if working:
-        save_results(working, token, timestamp)
-    else:
-        print("❌ No working channels found")
+    save_results(results, channels, timestamp)
 
 if __name__ == "__main__":
     main()
