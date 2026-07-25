@@ -2,7 +2,6 @@ import requests
 import re
 import os
 import json
-import execjs
 from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -25,53 +24,43 @@ TOKEN_URL = "https://yodaplayer.yodacdn.net/"
 CHANNEL_CONFIG_URL = "https://yoda.az/tv.channel.config.js"
 
 def get_channel_config():
-    """Fetch channel configuration from yoda.az"""
+    """Fetch channel configuration from yoda.az using regex"""
     print("📡 Fetching channel configuration...")
     try:
         response = requests.get(CHANNEL_CONFIG_URL, headers=headers, timeout=15)
         if response.status_code == 200:
             js_content = response.text
             
-            # Extract channel config using regex
-            config_match = re.search(r'const channel_config = (\[[\s\S]*?\]);', js_content)
-            if config_match:
-                config_text = config_match.group(1)
+            # Find all channel objects
+            channels = []
+            
+            # Pattern to match each channel object
+            # Look for channelID, channelName, channelSource
+            pattern = r'\{[^{}]*channelID:\s*"([^"]+)"[^{}]*channelName:\s*"([^"]+)"[^{}]*channelSource:\s*"([^"]+)"[^{}]*\}'
+            
+            matches = re.findall(pattern, js_content, re.DOTALL)
+            
+            for match in matches:
+                channel_id = match[0]
+                channel_name = match[1]
+                source_url = match[2]
                 
-                # Parse the JS array manually using regex
-                channels = []
-                channel_blocks = re.finditer(r'\{[^{}]*\}', config_text)
+                # Extract slug from URL
+                slug_match = re.search(r'https?://str[0-9]*\.yodacdn\.net/([^/]+)/', source_url)
+                if slug_match:
+                    slug = slug_match.group(1)
+                else:
+                    slug = channel_id
                 
-                for block in channel_blocks:
-                    block_text = block.group()
-                    
-                    # Extract fields
-                    channel_id = re.search(r'channelID:\s*"([^"]+)"', block_text)
-                    channel_name = re.search(r'channelName:\s*"([^"]+)"', block_text)
-                    channel_source = re.search(r'channelSource:\s*"([^"]+)"', block_text)
-                    
-                    if channel_id and channel_source:
-                        # Extract the actual channel slug from the URL
-                        url = channel_source.group(1)
-                        # https://str.yodacdn.net/azertv/video.m3u8 -> azertv
-                        slug_match = re.search(r'https?://str[0-9]*\.yodacdn\.net/([^/]+)/', url)
-                        if slug_match:
-                            slug = slug_match.group(1)
-                        else:
-                            # Fallback: use channelID
-                            slug = channel_id.group(1)
-                        
-                        channels.append({
-                            "id": channel_id.group(1),
-                            "name": channel_name.group(1) if channel_name else channel_id.group(1),
-                            "slug": slug,
-                            "source": url
-                        })
-                
-                print(f"✅ Found {len(channels)} channels in config")
-                return channels
-            else:
-                print("❌ Could not find channel_config in JS")
-                return []
+                channels.append({
+                    "id": channel_id,
+                    "name": channel_name,
+                    "slug": slug,
+                    "source": source_url
+                })
+            
+            print(f"✅ Found {len(channels)} channels in config")
+            return channels
         else:
             print(f"❌ Failed to fetch config: {response.status_code}")
             return []
@@ -142,9 +131,9 @@ def process_channel(channel, token):
     slug = channel['slug']
     name = channel['name']
     channel_id = channel['id']
-    
-    # Use the original source URL but add token
     source_url = channel['source']
+    
+    # Add token to URL
     if '?' in source_url:
         m3u8_url = f"{source_url}&token={token}"
     else:
@@ -162,15 +151,11 @@ def process_channel(channel, token):
             
             for line in lines:
                 line = line.strip()
-                if line and not line.startswith("#"):
-                    # Check if it's a relative path
-                    if not line.startswith("http"):
-                        # Use the base URL from source
-                        base_url = re.sub(r'/[^/]+$', '/', source_url)
-                        full_url = base_url + line
-                        modified_content.append(full_url)
-                    else:
-                        modified_content.append(line)
+                if line and not line.startswith("#") and not line.startswith("http"):
+                    # Relative path - prepend base URL
+                    base_url = re.sub(r'/[^/]+$', '/', source_url)
+                    full_url = base_url + line
+                    modified_content.append(full_url)
                 else:
                     modified_content.append(line)
             
@@ -182,7 +167,7 @@ def process_channel(channel, token):
         print(f"   ❌ Error: {e}")
         return None
 
-def save_results(results, token, channels, timestamp):
+def save_results(results, channels, timestamp):
     """Save results to files"""
     # Save individual channel files
     for channel in channels:
@@ -220,14 +205,16 @@ def save_results(results, token, channels, timestamp):
             "working_count": len(working),
             "working_channels": [ch['name'] for ch in working],
             "failed_channels": [ch['name'] for ch in failed]
-        }, f, indent=2)
+        }, f, indent=2, ensure_ascii=False)
     
     print(f"\n✅ Results saved to {output_dir}/")
     print(f"   - Working: {len(working)}/{len(channels)} channels")
     if failed:
         print(f"   - Failed: {len(failed)} channels")
-        for ch in failed:
+        for ch in failed[:5]:  # Show first 5 failed
             print(f"     • {ch['name']}")
+        if len(failed) > 5:
+            print(f"     • ... and {len(failed)-5} more")
 
 def main():
     """Main function"""
@@ -270,7 +257,7 @@ def main():
             print(f"   ❌ FAILED")
     
     # Save results
-    save_results(results, token, channels, timestamp)
+    save_results(results, channels, timestamp)
     print("\n✅ Process completed successfully!")
 
 if __name__ == "__main__":
