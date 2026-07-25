@@ -24,8 +24,8 @@ TOKEN_URL = "https://yodaplayer.yodacdn.net/"
 CHANNEL_CONFIG_URL = "https://yoda.az/tv.channel.config.js"
 
 def get_channel_config():
-    """Fetch channel configuration from yoda.az using regex"""
-    print("📡 Fetching channel configuration...")
+    """Fetch ALL channels from yoda.az config"""
+    print("📡 Fetching ALL channel configurations...")
     try:
         response = requests.get(CHANNEL_CONFIG_URL, headers=headers, timeout=15)
         if response.status_code == 200:
@@ -33,7 +33,8 @@ def get_channel_config():
             
             channels = []
             
-            # Pattern to match each channel object
+            # Find all channel objects - more flexible pattern
+            # Look for channelID, channelName, channelSource
             pattern = r'\{[^{}]*channelID:\s*"([^"]+)"[^{}]*channelName:\s*"([^"]+)"[^{}]*channelSource:\s*"([^"]+)"[^{}]*\}'
             
             matches = re.findall(pattern, js_content, re.DOTALL)
@@ -57,7 +58,7 @@ def get_channel_config():
                     "source": source_url
                 })
             
-            print(f"✅ Found {len(channels)} channels in config")
+            print(f"✅ Found ALL {len(channels)} channels in config")
             return channels
         else:
             print(f"❌ Failed to fetch config: {response.status_code}")
@@ -125,13 +126,13 @@ def get_token_via_requests():
         return None
 
 def process_channel(channel, token):
-    """Process a single channel - extract all track URLs"""
+    """Process a single channel - add token to ALL URLs"""
     slug = channel['slug']
     name = channel['name']
     channel_id = channel['id']
     source_url = channel['source']
     
-    # Add token to URL
+    # ALWAYS add token to the main URL
     if '?' in source_url:
         m3u8_url = f"{source_url}&token={token}"
     else:
@@ -140,6 +141,7 @@ def process_channel(channel, token):
     print(f"📡 Processing: {name} ({slug})")
     
     try:
+        # Fetch with token
         content_response = requests.get(m3u8_url, headers=headers, timeout=10)
         
         if content_response.status_code == 200:
@@ -155,7 +157,7 @@ def process_channel(channel, token):
                 
                 # If line is a relative path (not starting with http or #)
                 if line and not line.startswith("#") and not line.startswith("http"):
-                    # Fix: add token to the track URL too
+                    # Add token to track URL
                     track_url = base_url + line
                     if '?' in track_url:
                         track_url = f"{track_url}&token={token}"
@@ -184,7 +186,7 @@ def save_results(results, channels, timestamp):
             with open(filename, "w", encoding="utf-8") as f:
                 f.write(content)
     
-    # Save master playlist
+    # Save master playlist with ALL working channels
     master_file = os.path.join(output_dir, f"master_{timestamp}.m3u8")
     with open(master_file, "w", encoding="utf-8") as f:
         f.write("#EXTM3U\n")
@@ -194,12 +196,12 @@ def save_results(results, channels, timestamp):
             if content:
                 name = channel['name']
                 f.write(f'\n#EXTINF:-1,{name}\n')
-                # Extract first track URL (any line starting with http)
+                # Extract first track URL
                 match = re.search(r'https://str[0-9]*\.yodacdn\.net/[^/]+/[^\n]+\.m3u8', content)
                 if match:
                     f.write(match.group(0) + "\n")
     
-    # Save metadata
+    # Save metadata with ALL channels (working + failed)
     meta_file = os.path.join(output_dir, f"metadata_{timestamp}.json")
     with open(meta_file, "w", encoding="utf-8") as f:
         working = [ch for ch in channels if results.get(ch['id'])]
@@ -216,6 +218,8 @@ def save_results(results, channels, timestamp):
     print(f"   - Working: {len(working)}/{len(channels)} channels")
     if failed:
         print(f"   - Failed: {len(failed)} channels")
+        for ch in failed:
+            print(f"     • {ch['name']}")
 
 def main():
     """Main function"""
@@ -223,13 +227,13 @@ def main():
     print(f"📅 {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("-" * 50)
     
-    # Get channel config first
+    # Get ALL channels from config
     channels = get_channel_config()
     if not channels:
         print("❌ Failed to get channel configuration. Exiting.")
         exit(1)
     
-    print(f"📺 Found {len(channels)} channels")
+    print(f"📺 Total channels in config: {len(channels)}")
     print("-" * 50)
     
     # Get token
@@ -244,7 +248,7 @@ def main():
     print(f"✅ Token retrieved: {token[:10]}...")
     print("-" * 50)
     
-    # Process all channels
+    # Process ALL channels with token
     results = {}
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     
