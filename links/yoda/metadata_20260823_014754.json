@@ -1,0 +1,149 @@
+{
+  "timestamp": "20260823_014754",
+  "total_channels": 28,
+  "working_count": 6,
+  "working_channels": [
+    {
+      "name": "AZTV",
+      "slug": "azertv",
+      "id": "azertv"
+    },
+    {
+      "name": "Baku TV",
+      "slug": "bakutv",
+      "id": "bakutv"
+    },
+    {
+      "name": "İdman TV",
+      "slug": "idmantele",
+      "id": "idmantele"
+    },
+    {
+      "name": "Naxçıvan  TV",
+      "slug": "ntv",
+      "id": "ntv"
+    },
+    {
+      "name": "Kanal 35",
+      "slug": "kanal35",
+      "id": "kanal35"
+    },
+    {
+      "name": "Mədəniyyət",
+      "slug": "medeniyyettele",
+      "id": "medeniyyettele"
+    }
+  ],
+  "failed_channels": [
+    {
+      "name": "XƏZƏR",
+      "slug": "xazar",
+      "id": "xazartv"
+    },
+    {
+      "name": "İctimai",
+      "slug": "ictimaitv",
+      "id": "ictimaitele"
+    },
+    {
+      "name": "BIZNES TV",
+      "slug": "biznestv",
+      "id": "biznestv"
+    },
+    {
+      "name": "Real TV",
+      "slug": "real",
+      "id": "real"
+    },
+    {
+      "name": "Qafqaz TV",
+      "slug": "qafkaz",
+      "id": "qafkaz"
+    },
+    {
+      "name": "ATV",
+      "slug": "atv",
+      "id": "atv"
+    },
+    {
+      "name": "ARB24",
+      "slug": "arb24",
+      "id": "arb24"
+    },
+    {
+      "name": "APA TV",
+      "slug": "apatv",
+      "id": "apatv"
+    },
+    {
+      "name": "Haber Global",
+      "slug": "haberglobal",
+      "id": "haberglobal"
+    },
+    {
+      "name": "TMB TV",
+      "slug": "tmbtr",
+      "id": "tmbtr"
+    },
+    {
+      "name": "TMB Azərbaycan",
+      "slug": "tmbaz",
+      "id": "tmbaz"
+    },
+    {
+      "name": "ARB",
+      "slug": "arb",
+      "id": "arb"
+    },
+    {
+      "name": "Kanal S",
+      "slug": "start",
+      "id": "start"
+    },
+    {
+      "name": "ELTV",
+      "slug": "eltv",
+      "id": "eltv"
+    },
+    {
+      "name": "ARB GÜNƏŞ",
+      "slug": "arbgunesh",
+      "id": "arbgunesh"
+    },
+    {
+      "name": "CBC",
+      "slug": "cbc",
+      "id": "cbc"
+    },
+    {
+      "name": "Space",
+      "slug": "space",
+      "id": "space"
+    },
+    {
+      "name": "Vostok TV",
+      "slug": "tmb",
+      "id": "tmb"
+    },
+    {
+      "name": "Show Plus TV",
+      "slug": "showplus",
+      "id": "showplus"
+    },
+    {
+      "name": "MTV Azerbaijan",
+      "slug": "mtvaz",
+      "id": "mtvaz"
+    },
+    {
+      "name": "SH TV",
+      "slug": "shtv",
+      "id": "shtv"
+    },
+    {
+      "name": "VIP HD",
+      "slug": "vip",
+      "id": "vip"
+    }
+  ]
+}
